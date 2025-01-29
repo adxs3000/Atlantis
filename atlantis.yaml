@@ -1,15 +1,30 @@
+# atlantis.yaml
 version: 3
+automerge: false
+delete_source_branch_on_merge: true
+parallel_plan: true
+parallel_apply: true
 projects:
-  - name: aws-s3-bucket
-    dir: .
-    terraform_version: 1.0.0
-    apply_requirements: [approved]
-    workflow: default
-    allowed_overrides: [apply_requirements, workflow, delete_source_branch_on_merge]
-    allow_custom_workflows: true
+  - name: dev
+    #branch: /main/
+    dir: ./accounts/dev/common
+    workspace: default
+    autoplan:
+      when_modified: [ "*.tf", "../modules/**/*.tf", "*.tfvars" ]
+      enabled: true
+    terraform_version: v1.6.6
+    apply_requirements: [ approved ]
+    workflow: dev_workflow
 workflows:
-  default:
+  dev_workflow:
     plan:
-      steps: [init, plan]
+      steps:
+        - run: echo "terraform init"
+        - init
+        - run: echo "terraform plan"
+        - plan:
+            extra_args: [ -var-file=../../../tfvars/dev.tfvars ]
     apply:
-      steps: [apply]
+      steps:
+        - run: echo "terraform apply"
+        - apply
