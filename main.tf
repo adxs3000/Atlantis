@@ -15,7 +15,7 @@ resource "aws_s3_bucket" "my-bucket" {
   bucket = "atlantis-test-bucket-adkd1234"  # Unique bucket name
 
   tags = {
-    Name        = "Atlantis Test Bucket"
+    Name        = "Atlantis Test Buckettt"
     Environment = "Dev"
   }
 }
