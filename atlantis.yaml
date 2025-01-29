@@ -1,6 +1,8 @@
 version: 3
-repos:
-  - id: /.*/
+projects:
+  - name: aws-s3-bucket
+    dir: .
+    terraform_version: 1.0.0
     apply_requirements: [approved]
     workflow: default
     allowed_overrides: [apply_requirements, workflow, delete_source_branch_on_merge]
