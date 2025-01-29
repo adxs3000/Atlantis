@@ -26,5 +26,5 @@ workflows:
             extra_args: [ -var-file=../../../tfvars/dev.tfvars ]
     apply:
       steps:
-        - run: echo "terraform apply"
+        - run: echo "terraform ap"
         - apply
